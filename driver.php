@@ -35,33 +35,34 @@ $course_id = $courses_obj->id;
 //Found a course for this JWT
 print "$course_id : $courses_obj->title : $courses_obj->street : $courses_obj->state : $courses_obj->zip : $courses_obj->summary\n";
 
-//Build New Customer Array
-$customer["username"] = "someusername";
-$customer["company_name"] = "None LLC";
-$customer["taxable"] = true;
-$customer["discount"] = 0;
-$customer["opt_out_email"] = false;
-$customer["opt_out_text"] = false;
-$customer["date_created"] = "2019-01-09T06:07:00-0700";
-$customer["contact_info"]["id"] = "2073";
-$customer["contact_info"]["first_name"] = "Some";
-$customer["contact_info"]["last_name"] = "Name";
-$customer["contact_info"]["phone_number"] = "801";
-$customer["contact_info"]["cell_phone_number"] = "123";
-$customer["contact_info"]["email"] = "foreup@fake.com";
-$customer["contact_info"]["birthday"] = "2017-01-09T06:07:00-0700";
-$customer["contact_info"]["address1"] = "101 Test Way";
-$customer["contact_info"]["address2"] = "Apt #13";
-$customer["contact_info"]["city"] = "Lindon";
-$customer["contact_info"]["state"] = "UT";
-$customer["contact_info"]["zip"] = "12345";
-$customer["contact_info"]["country"] = "USA";
-$customer["contact_info"]["handicap_account_number"] = "1";
-$customer["contact_info"]["handicap_score"] = "12";
-$customer["contact_info"]["comments"] = "The best!";
-
+//Build New Customer Object
 $customer_obj = new Customers();
-$customer_obj->createCustomer($course_id,$customer);
+$customer_obj->type = "customer";
+$customer_obj->username = "someusername";
+$customer_obj->company_name = "None LLC";
+$customer_obj->taxable = true;
+$customer_obj->discount = 0;
+$customer_obj->opt_out_email = false;
+$customer_obj->opt_out_text = false;
+$customer_obj->date_created = "2019-01-09T06:07:00-0700";
+$customer_obj->id = "2073";
+$customer_obj->first_name = "Some";
+$customer_obj->last_name = "Name";
+$customer_obj->phone_number = "801";
+$customer_obj->cell_phone_number = "123";
+$customer_obj->email = "foreup@fake.com";
+$customer_obj->birthday = "2017-01-09T06:07:00-0700";
+$customer_obj->address1 = "101 Test Way";
+$customer_obj->address2 = "Apt #13";
+$customer_obj->city = "Lindon";
+$customer_obj->state = "UT";
+$customer_obj->zip = "12345";
+$customer_obj->country = "USA";
+$customer_obj->handicap_account_number = "1";
+$customer_obj->handicap_score = "12";
+$customer_obj->comments = "The best!";
+
+$customer_obj->createCustomer($course_id);
 
 //Entered a Customer
 print "$customer_obj->id : $customer_obj->first_name : $customer_obj->last_name : $customer_obj->username : $customer_obj->companyname\n";
