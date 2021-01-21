@@ -1,7 +1,9 @@
 <?php
 //Implements Courses End Point
+include_once(__DIR__.'/jwtHTTPTrait.php');
 class Courses
 {
+    use jwtHTTPTrait;
     public $id;
     public $title;
     public $street;
@@ -21,7 +23,7 @@ class Courses
         $uri = URL_COURSELIST;
         $method = "GET";
         $jsonapibody = "";
-        $response_obj = $this->getCoursesResponse($uri,$method,$jsonapibody);
+        $response_obj = $this->getjwtHTTPResponse($uri,$method,$jsonapibody);
         //Assuming this is a single item, which may not be true.
         //        print_r($response_obj);
         //        exit;
@@ -33,14 +35,6 @@ class Courses
         $this->phone = $response_obj[0]->phone;
         $this->summary = $response_obj[0]->course_summary;
         
-    }
-    
-    public function getCoursesResponse($uri,$method,$jsonapibody = "")
-    {
-        //jwtHTTP Wrapper
-        $jwtHTTP = new JWTHTTP();
-        $response_object = $jwtHTTP->GetResponse($uri,$method,$jsonapibody);
-        return $response_object;
     }
     
 }

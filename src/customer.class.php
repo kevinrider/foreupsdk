@@ -1,7 +1,9 @@
 <?php
 //Implements Customers End Point
+include_once(__DIR__.'/jwtHTTPTrait.php'); 
 class Customers
 {
+    use jwtHTTPTrait;
     public $type;
     public $id;
     public $username;
@@ -14,7 +16,15 @@ class Customers
     public $first_name;
     public $last_name;
     
-    
+    public function getOneCustomer($course_id,$customer_id)
+    {
+        //Get Customer record for a specific Course and customer id.
+        $uri = str_replace("courseId",$course_id,URL_GETONE_CUSTOMER);
+        $uri = str_replace("customerId",$customer_id,$uri);
+        $method = "GET";
+        $response_obj = $this->getjwtHTTPResponse($uri,$method);
+        self::MapResponse($response_obj[0]);
+    }
     
     public function createCustomer($course_id,$customerArray)
     {
@@ -22,7 +32,13 @@ class Customers
         $uri = str_replace("courseId",$course_id,URL_CREATE_CUSTOMER);
         $method = "POST";
         $jsonapibody = "{\"data\": { \"type\": \"customer\", \"attributes\":" .  json_encode($customerArray) . "}}";
-        $response_obj = $this->getCustomerResponse($uri,$method,$jsonapibody);
+        $response_obj = $this->getjwtHTTPResponse($uri,$method,$jsonapibody);
+        self::MapResponse($response_obj);
+        
+    }
+    
+    protected function MapResponse($response_obj)
+    {
         $this->id = $response_obj->contact_info['id'];
         $this->first_name = $response_obj->contact_info['first_name'];
         $this->last_name = $response_obj->contact_info['last_name'];
@@ -34,16 +50,6 @@ class Customers
         $this->opt_out_email = $response_obj->opt_out_email;
         $this->opt_out_text = $response_obj->opt_out_text;
         $this->date_created = $response_obj->date_created;
-        
     }
-    
-    public function getCustomerResponse($uri,$method,$jsonapibody = "")
-    {
-        //jwtHTTP Wrapper
-        $jwtHTTP = new JWTHTTP();
-        $response_object = $jwtHTTP->GetResponse($uri,$method,$jsonapibody);
-        return $response_object;
-    }
-    
 }
 

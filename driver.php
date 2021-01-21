@@ -66,3 +66,8 @@ $customer_obj->createCustomer($course_id,$customer);
 //Entered a Customer
 print "$customer_obj->id : $customer_obj->first_name : $customer_obj->last_name : $customer_obj->username : $customer_obj->companyname\n";
 
+//Get One Customer Record
+$getone_obj = new Customers();
+$getone_obj->getOneCustomer($course_id,$customer_obj->id);
+print "GetOne Response: $getone_obj->id : $getone_obj->first_name : $getone_obj->last_name : $getone_obj->username : $getone_obj->companyname\n";
+
