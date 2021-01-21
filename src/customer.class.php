@@ -36,7 +36,7 @@ class Customers implements JsonSerializable
         $uri = str_replace("customerId",$customer_id,$uri);
         $method = "GET";
         $response_obj = $this->getjwtHTTPResponse($uri,$method);
-        self::MapResponse($response_obj[0]);
+        $this->MapResponse($response_obj[0]);
     }
     
     public function createCustomer($course_id)
@@ -46,7 +46,7 @@ class Customers implements JsonSerializable
         $method = "POST";
         $jsonapibody = json_encode($this->jsonSerialize());
         $response_obj = $this->getjwtHTTPResponse($uri,$method,$jsonapibody);
-        self::MapResponse($response_obj);
+        $this->MapResponse($response_obj);
     }
     
     protected function MapResponse($response_obj)
