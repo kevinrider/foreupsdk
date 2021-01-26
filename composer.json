@@ -9,10 +9,8 @@
             "email": "github@thebackwaters.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "guzzlehttp/guzzle": "^6.0",
-        "woohoolabs/yang": "dev-master",
-        "php-http/guzzle6-adapter": "2.x-dev"
+        "guzzlehttp/guzzle": "^7.2"
     }
 }

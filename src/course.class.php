@@ -4,13 +4,15 @@ include_once(__DIR__.'/jwtHTTPTrait.php');
 class Courses
 {
     use jwtHTTPTrait;
+    public $type;
     public $id;
     public $title;
     public $street;
     public $state;
     public $zip;
     public $phone;
-    public $summary;
+    public $course_summary;
+    public $base_color;
     
     function __construct($id = "")
     {
@@ -25,16 +27,8 @@ class Courses
         $jsonapibody = "";
         $response_obj = $this->getjwtHTTPResponse($uri,$method,$jsonapibody);
         //Assuming this is a single item, which may not be true.
-        //        print_r($response_obj);
-        //        exit;
-        $this->id = $response_obj[0]->id;
-        $this->title = $response_obj[0]->title;
-        $this->street = $response_obj[0]->street;
-        $this->state = $response_obj[0]->state;
-        $this->zip = $response_obj[0]->zip;
-        $this->phone = $response_obj[0]->phone;
-        $this->summary = $response_obj[0]->course_summary;
-        
+        //Could be handled in jsonResponseMap if more than one.
+        $this->jsonResponseMap($response_obj);
     }
     
 }
